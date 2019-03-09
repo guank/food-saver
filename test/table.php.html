@@ -1,0 +1,39 @@
+<?php
+//Turn on error reporting
+ini_set('display_errors', 'On');
+//Connects to the database
+$mysqli = new mysqli("oniddb.cws.oregonstate.edu","frishmab-db","rtU242L9OruOWiFf","frishmab-db");
+if($mysqli->connect_errno){
+       echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
+       }
+?>
+<table id="book-grid">
+	<thead>
+		<tr>
+			<th>Business Name</th>
+			<th>Phone</th>
+			<th>Address</th>
+			<th>Email</th>
+			<th>Item</th>
+			<th>Quantity</th>
+			<th>Watching</th>
+		</tr>
+	</thead>
+	<tbody>
+	        <?php
+                       if(!($stmt = $mysqli->prepare("SELECT bus.name, bus.phone, bus.address, bus.email, i.name, i.quantity, i.watching FROM business bus INNER JOIN item i on i.bid = bus.id"))){
+                               echo "Prepare failed: "  . $stmt->errno . " " . $stmt->error;
+                       }
+                       if(!$stmt->execute()){
+                               echo "Execute failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
+                       }
+                       if(!$stmt->bind_result($bname, $phone, $address, $email, $iname, $quant, $watching)){
+                               echo "Bind failed: "  . $mysqli->connect_errno . " " . $mysqli->connect_error;
+                       }
+                       while($stmt->fetch()){
+                               echo "<tr>\n<td>" . $bname . "\n</td>\n<td>" . $phone . "\n</td>\n<td>" . $address . "\n</td>\n<td>" . $email . "\n</td>\n<td>" . $iname . "\n</td>\n<td>" . $quant . "\n</td>\n<td>" . $watching . "\n</td>\n</tr>";
+                       }
+                       $stmt->close();
+               ?>
+    </tbody>
+</table>
