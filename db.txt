@@ -1,0 +1,67 @@
+DROP TABLE IF EXISTS `business`;
+DROP TABLE IF EXISTS `item`;
+
+CREATE TABLE `item`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`name` varchar(255) NOT NULL,
+PRIMARY KEY (`id`)
+)ENGINE=InnoDB;
+
+INSERT INTO `item` VALUES (1,'Chicken salad sandwich'),
+(2,'Apple pie'),
+(3,'Challah loaf'),
+(4,'Bananas, bunch'),
+(5,'Broccoli crown');
+
+CREATE TABLE `business`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`name` varchar(255) NOT NULL,
+`phone` varchar(255) NOT NULL,
+`address` varchar(255) NOT NULL,
+`email` varchar(255) DEFAULT NULL,
+`item_ID` int(11) NULL,
+`cust_contact` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY `name` (`name`),
+CONSTRAINT `business_ibfk_1` FOREIGN KEY (`item_ID`)
+REFERENCES `item` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
+INSERT INTO `business` VALUES (1,'Ken’s Artisan Bakery','(503)248-2202','338 NW 21st Ave Portland OR 97209',NULL, 2, NULL),
+(2,'Baker & Spice','(503)244-7573','6330 SW Capitol Hwy Portland OR 97239', NULL, NULL, NULL),
+(3,'Panera Cares','(503)287-5900','4143 NE Halsey St Portland OR 97232', NULL, 3, NULL),
+(4,'Farm House Cafe','(503) 206-8543','101 SW Main St Portland OR 97204', NULL, NULL, NULL);
+DROP TABLE IF EXISTS `business`;
+DROP TABLE IF EXISTS `item`;
+
+CREATE TABLE `item`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`name` varchar(255) NOT NULL,
+PRIMARY KEY (`id`)
+)ENGINE=InnoDB;
+
+INSERT INTO `item` VALUES (1,'Chicken salad sandwich'),
+(2,'Apple pie'),
+(3,'Challah loaf'),
+(4,'Bananas, bunch'),
+(5,'Broccoli crown');
+
+CREATE TABLE `business`(
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`name` varchar(255) NOT NULL,
+`phone` varchar(255) NOT NULL,
+`address` varchar(255) NOT NULL,
+`email` varchar(255) DEFAULT NULL,
+`item_ID` int(11) NULL,
+`cust_contact` varchar(255) DEFAULT NULL,
+PRIMARY KEY (`id`),
+UNIQUE KEY `name` (`name`),
+CONSTRAINT `business_ibfk_1` FOREIGN KEY (`item_ID`)
+REFERENCES `item` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
+INSERT INTO `business` VALUES (1,'Ken’s Artisan Bakery','(503)248-2202','338 NW 21st Ave Portland OR 97209',NULL, 2, NULL),
+(2,'Baker & Spice','(503)244-7573','6330 SW Capitol Hwy Portland OR 97239', NULL, NULL, NULL),
+(3,'Panera Cares','(503)287-5900','4143 NE Halsey St Portland OR 97232', NULL, 3, NULL),
+(4,'Farm House Cafe','(503)206-8543','101 SW Main St Portland OR 97204', NULL, NULL, NULL),
+(5,'Petite Provence','(503)284-6564','1824 NE Alberta St Portland OR 97211', NULL, NULL, NULL);
